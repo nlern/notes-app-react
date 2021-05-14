@@ -20,10 +20,14 @@ export default function ListItem({
       <div className='transition delay-150 ease-in-out absolute right-0 bottom-0 opacity-0 group-hover:opacity-100'>
         <ul className='flex flex-row space-x-2 m-2 text-sm'>
           <li>
-            <button className='text-blue-600'>Edit</button>
+            <button className='text-blue-600' title='Edit Note'>
+              Edit
+            </button>
           </li>
           <li>
-            <button className='text-red-600'>Delete</button>
+            <button className='text-red-600' title='Delete Note'>
+              Delete
+            </button>
           </li>
         </ul>
       </div>
