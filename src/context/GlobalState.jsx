@@ -3,22 +3,23 @@ import AppReducer from './AppReducer';
 
 // initial state
 const initialState = {
-  notes: [
-    {
-      id: 1,
-      title: 'My First Note',
-      shortDescription: 'This is my first note.',
-      createdDate: new Date(),
-      lastModifiedDate: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      title: 'My Second Note',
-      shortDescription: 'This is my second note.',
-      createdDate: new Date(),
-      lastModifiedDate: new Date().toISOString(),
-    },
-  ],
+  notes: [],
+};
+
+const generateUUID = () => {
+  let d = new Date().getTime(),
+    d2 = (performance && performance.now && performance.now() * 1000) || 0;
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    let r = Math.random() * 16;
+    if (d > 0) {
+      r = (d + r) % 16 | 0;
+      d = Math.floor(d / 16);
+    } else {
+      r = (d2 + r) % 16 | 0;
+      d2 = Math.floor(d2 / 16);
+    }
+    return (c == 'x' ? r : (r & 0x7) | 0x8).toString(16);
+  });
 };
 
 // create context
@@ -27,8 +28,36 @@ export const GlobalContext = createContext(initialState);
 // create provider
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
+
+  // actions
+  function addNewNote({ title, description }) {
+    const id = generateUUID();
+    const today = new Date().toISOString();
+    const trimmedDescription = description.trim();
+    // count note words
+    const words = trimmedDescription.split(' ');
+    // prepare short description
+    const shortDescription =
+      words.length <= 5
+        ? trimmedDescription
+        : [...words.slice(0, 5), '...'].join(' ');
+    const newNote = {
+      id,
+      title,
+      description: trimmedDescription,
+      shortDescription,
+      createdDate: today,
+      lastModifiedDate: today,
+    };
+
+    dispatch({
+      type: 'ADD_NEW_NOTE',
+      payload: newNote,
+    });
+  }
+
   return (
-    <GlobalContext.Provider value={{ notes: state.notes }}>
+    <GlobalContext.Provider value={{ notes: state.notes, addNewNote }}>
       {children}
     </GlobalContext.Provider>
   );
