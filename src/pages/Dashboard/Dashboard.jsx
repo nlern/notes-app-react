@@ -15,7 +15,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     const isValid = Boolean(title);
-    console.log(isValid);
     setIsFormValid(isValid);
   }, [title]);
 
