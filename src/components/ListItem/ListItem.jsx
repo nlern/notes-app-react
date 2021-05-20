@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function ListItem({
   item: { title, lastModifiedDate, description },
+  onEditClick,
   onDeleteClick,
 }) {
   const lstModDate = new Date(lastModifiedDate);
@@ -24,7 +25,11 @@ export default function ListItem({
       <div className='transition delay-150 ease-in-out absolute right-0 bottom-0 opacity-0 group-hover:opacity-100'>
         <ul className='flex flex-row space-x-2 m-2 text-sm'>
           <li>
-            <button className='text-blue-600' title='Edit Note'>
+            <button
+              className='text-blue-600'
+              title='Edit Note'
+              onClick={onEditClick}
+            >
               Edit
             </button>
           </li>

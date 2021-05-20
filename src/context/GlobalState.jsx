@@ -54,9 +54,16 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function updateNote(note) {
+    dispatch({
+      type: 'UPDATE_NOTE',
+      payload: note,
+    });
+  }
+
   return (
     <GlobalContext.Provider
-      value={{ notes: state.notes, addNewNote, deleteNote }}
+      value={{ notes: state.notes, addNewNote, deleteNote, updateNote }}
     >
       {children}
     </GlobalContext.Provider>
