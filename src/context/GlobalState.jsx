@@ -42,13 +42,22 @@ export const GlobalProvider = ({ children }) => {
     };
 
     dispatch({
-      type: 'ADD_NEW_NOTE',
+      type: 'ADD_NOTE',
       payload: newNote,
     });
   }
 
+  function deleteNote(id) {
+    dispatch({
+      type: 'DELETE_NOTE',
+      payload: id,
+    });
+  }
+
   return (
-    <GlobalContext.Provider value={{ notes: state.notes, addNewNote }}>
+    <GlobalContext.Provider
+      value={{ notes: state.notes, addNewNote, deleteNote }}
+    >
       {children}
     </GlobalContext.Provider>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function ListItem({
   item: { title, lastModifiedDate, description },
+  onDeleteClick,
 }) {
   const lstModDate = new Date(lastModifiedDate);
   const formmatedLstModDate = `${lstModDate.getDate()}-${(
@@ -28,7 +29,11 @@ export default function ListItem({
             </button>
           </li>
           <li>
-            <button className='text-red-600' title='Delete Note'>
+            <button
+              className='text-red-600'
+              title='Delete Note'
+              onClick={onDeleteClick}
+            >
               Delete
             </button>
           </li>
