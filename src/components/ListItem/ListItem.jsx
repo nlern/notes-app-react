@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function ListItem({
-  item: { title, lastModifiedDate, shortDescription },
+  item: { title, lastModifiedDate, description },
 }) {
   const lstModDate = new Date(lastModifiedDate);
   const formmatedLstModDate = `${lstModDate.getDate()}-${(
@@ -13,7 +13,10 @@ export default function ListItem({
     <div className='transition delay-150 ease-in-out transform group border p-4 mb-2 hover:shadow relative'>
       <div className='relative'>
         <h1 className='text-gray-800 font-medium'>{title}</h1>
-        <span className='absolute right-0 top-0 text-sm text-gray-400'>
+        <span
+          className='absolute right-0 top-0 text-sm text-gray-400'
+          title={`Last modified on: ${formmatedLstModDate}`}
+        >
           {formmatedLstModDate}
         </span>
       </div>
@@ -31,7 +34,9 @@ export default function ListItem({
           </li>
         </ul>
       </div>
-      <div className='text-sm text-gray-500'>{shortDescription}</div>
+      <div className='text-sm text-gray-500'>
+        <p className='whitespace-pre-line'>{description}</p>
+      </div>
     </div>
   );
 }

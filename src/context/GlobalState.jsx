@@ -33,19 +33,10 @@ export const GlobalProvider = ({ children }) => {
   function addNewNote({ title, description }) {
     const id = generateUUID();
     const today = new Date().toISOString();
-    const trimmedDescription = description.trim();
-    // count note words
-    const words = trimmedDescription.split(' ');
-    // prepare short description
-    const shortDescription =
-      words.length <= 5
-        ? trimmedDescription
-        : [...words.slice(0, 5), '...'].join(' ');
     const newNote = {
       id,
       title,
-      description: trimmedDescription,
-      shortDescription,
+      description,
       createdDate: today,
       lastModifiedDate: today,
     };
