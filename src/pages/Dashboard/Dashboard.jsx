@@ -34,7 +34,7 @@ export default function Dashboard() {
     setIsOpen(true);
   };
 
-  const handleSubmit = (event) => {
+  const handleAddNote = (event) => {
     // prevent post callback.
     event.preventDefault();
 
@@ -106,7 +106,7 @@ export default function Dashboard() {
                 >
                   Add New Note
                 </Dialog.Title>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleAddNote}>
                   <div className='mt-2'>
                     <div className='mb-4'>
                       <label
